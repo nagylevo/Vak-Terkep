@@ -3,6 +3,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
+    color: black;
 }
 
 #kozepPar {
@@ -10,13 +11,25 @@ body {
 }
 
 #mapPic {
-    margin-top: 2%;
-    max-width: 60%;
+    margin-top: 3%;
+    max-width: 80%;
     border: 4pt outset gray;
+    margin: auto;
+    position: fixed;
+}
+
+#savedRoutesTable{
+    color: white
 }
 
 #logoPic {
-    max-width: 40%;
+    max-width: 30%;
+}
+#shownMap{
+    text-align:center;
+    margin:auto;
+    width: 300px;
+    height: auto;
 }
 
 #textArea {
@@ -36,52 +49,36 @@ body {
     border: 2pt outset black;
     border-radius: 10pt;
     background-color: rgb(255, 255, 255);
-    max-width: 35%;
     margin: auto;
-    margin-top: 10%;
+    margin-top: 10pt;
     padding-bottom: 1%;
     text-align: center;
     font-family: Calibri;
     box-shadow: inset 0px -6px 30px rgba(0, 0, 0, 0.3);
 }
 
+#linkButton{
+    color: white;
+    text-decoration: none;
+}
+
 #headerMenu {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 30px;
-    background-color: #992a2a;
-    z-index: 1000;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
+    height: 60px;
+    background-color: #992a2a;
     color: white;
     font-family: Berlin Sans FB;
-    padding: 1.5%;
+    padding: 10px;
     box-shadow: inset 0px -4px 6px rgba(0, 0, 0, 0.3);
 }
 
 
 
-
-#menuButton {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    background-color: #1251d8;
-    border-radius: 2pt;
-    color: white;
-    font-size: 100%;
-    cursor: pointer;
-    margin: 2%;
-    width: 100pt;
-    height: 30pt;
-}
-
-
-
 #searchButton {
-    background-color: rgb(173, 45, 23);
+    background-color: #992A2A;
     font-family: Berlin Sans FB;
     border-radius: 4pt;
     color: white;
@@ -96,4 +93,434 @@ body {
 #creatorsText {
     padding-right: 2%;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+#footerMenu {
+    background-color: #992a2a;
+    width: 100%;
+    height: 60pt;
+    font-size: 100%;
+    text-align: center;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.3);
+    padding-top: 6pt;
+}
+
+.signButton {
+    display: inline-block;
+    background-color: #0056B3;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 10px 20px !important;
+    border-radius: 6px;
+    transition: background-color 0.3s ease-in-out;
+    text-align: center;
+}
+.signButton:hover {
+    background-color: #0056B3;
+}
+
+#homeLink {
+    text-decoration: none;
+    color: white;
+}
+
+.signButton:hover {
+    color: white;
+}
+#fileInput {
+    text-align:center;
+    display:none;
+    height: 1pt;
+}
+
+.searchButton {
+    background-color: rgb(173, 45, 23);
+    font-family: Berlin Sans FB;
+    border-radius: 4pt;
+    color: white;
+    font-size: 70%;
+    max-width: 100%;
+    cursor: pointer;
+    padding: 1%;
+    text-decoration: none;
+}
+
+    .searchButton:hover {
+        color: white;
+    }
+
+.userButton {
+    background-color: rgb(173, 45, 23);
+    font-family: Berlin Sans FB;
+    border-radius: 4pt;
+    color: white;
+    font-size: 80%;
+    max-width: 100%;
+    cursor: pointer;
+    padding: 2%;
+    text-decoration: none;
+}
+.userPic {
+    border-radius: 100%;
+    width: 150px; 
+    height: 150px;
+    margin-top: 10pt;
+    object-fit: cover;
+}
+
+    .userButton:hover {
+        color: white;
+    }
+
+
+
+#loggedInTd {
+    width: 20%;
+    text-align: center;
+    font-family: Berlin Sans FB;
+    color: rgb(228, 238, 255);
+    font-size: 120%;
+    text-align: center;
+}
+
+#titleTextTd {
+    text-align: center;
+    font-family: Berlin Sans FB;
+    color: white;
+    font-size: larger;
+    width: 40%;
+}
+
+#buttonsTd {
+    width: 20%;
+}
+
+
+
+h2 {
+    font-weight: bold;
+    margin-top: 20pt;
+}
+
+#link {
+    font-size: 17pt;
+    text-align: right;
+    padding-right: 10pt;
+}
+
+#formSign {
+    font-size: 200%;
+    border: 2pt outset black;
+    border-radius: 10pt;
+    background-color: rgb(255, 255, 255);
+    max-width: 45%;
+    max-height: 50%;
+    margin: auto;
+    margin-top: 10%;
+    padding-bottom: 1%;
+    text-align: center;
+    font-family: Calibri;
+    box-shadow: inset 0px -6px 30px rgba(0, 0, 0, 0.3);
+}
+
+.placehold{
+    font-size: 22pt !important;
+    height: 40pt;
+}
+
+@media only screen and (max-width: 300px) {
+    #logoPic {
+        max-height: 40px;
+        max-width: 40px;
+    }
+    #homeLink {
+        font-size: 0.3rem;
+    }
+    #myCanvas {
+        max-width: 80%;
+    }
+    
+}
+
+#mapTable{
+    max-width: 400pt;
+}
+
+@media only screen and (max-width: 400px) {
+    #form{
+        max-width: 90%;
+    }
+    #submitButton {
+        max-width: 200px;
+    }
+    #inputFields {
+        max-width: 150px;
+        font-size: 14pt;
+        max-height: 70px;
+    }
+    #formSign {
+        max-width: 250px;
+    }
+    #logoPic {
+        max-height: 75px;
+        max-width: 75px;
+    }
+    
+    #homeLink {
+        font-size: 0.4rem;
+    }
+    .placehold {
+        font-size: 18pt !important;
+        height: 34pt;
+    }
+    #myCanvas {
+        max-width: 80%;
+    }
+}
+@media only screen and (max-width: 600px) {
+    #form {
+        max-width: 90%;
+    }
+    .signButton {
+        font-size: 90%;
+    }
+    #loggedInTd {
+        font-size: 90%;
+    }
+    #formSign{
+        max-width: 300px;
+    }
+    #formSignLabels{
+        font-size: 70%;
+        margin-bottom: 10px;
+    }
+    #submitButton {
+        max-width: 200px;
+    }
+    #inputFields {
+        max-width: 150px;
+        font-size: 14pt;
+        margin-bottom: 5pt;
+        max-height: 70px;
+    }
+    #logoPic {
+        max-height: 150px;
+        max-width: 150px;
+    }
+    
+    #homeLink {
+        font-size: 0.6rem;
+    }
+    #myCanvas {
+        max-width: 80%;
+    }
+}
+
+
+
+
+@media only screen and (max-width: 800px) {
+    #formSign {
+        max-width: 550px;
+    }
+    #logoPic {
+        max-height: 150px;
+        max-width: 150px;
+    }
+
+    #form {
+        max-width: 90%;
+    }
+
+    #homeLink {
+        font-size: 0.8rem;
+    }
+    #myCanvas {
+        max-width: 80%;
+    }
+    
+}
+@media only screen and (max-width: 900px) {
+    #form {
+        max-width: 90%;
+    }
+    #homeLink {
+        font-size: 1rem;
+    }
+    #myCanvas {
+        max-width: 80%;
+    }
+    #logoPic {
+        max-height: 150px;
+        max-width: 150px;
+    }
+    
+}
+
+@media only screen and (max-width: 1000px) {
+    #formSign {
+        max-width: 450px;
+    }
+    #homeLink {
+        font-size: 1rem;
+    }
+    #myCanvas {
+        max-width: 80%;
+    }
+    #logoPic {
+        max-height: 150px;
+        max-width: 150px;
+    }
+}
+@media only screen and (max-width: 1200px) {
+    #formSign {
+        max-width: 450px;
+    }
+
+    #homeLink {
+        font-size: 1.2rem;
+    }
+    #myCanvas{
+        max-width: 80%;
+    }
+    #logoPic {
+        max-height: 150px;
+        max-width: 150px;
+    }
+}
+@media only screen and (max-width: 1400px) {
+    #formSign {
+        max-width: 450px;
+    }
+    #logoPic {
+        max-height: 150px;
+        max-width: 150px;
+    }
+
+    #homeLink {
+        font-size: 1.2rem;
+    }
+}
+@media only screen and (max-width: 1600px) {
+    #formSign {
+        max-width: 450px;
+    }
+
+    #homeLink {
+        font-size: 1.2rem;
+    }
+    #logoPic {
+        max-height: 150px;
+        max-width: 150px;
+    }
+}
+@media only screen and (max-width: 1800px) {
+    #formSign {
+        max-width: 450px;
+    }
+
+    #homeLink {
+        font-size: 1.2rem;
+    }
+    #logoPic {
+        max-height: 150px;
+        max-width: 150px;
+    }
+}
+@media only screen and (max-width: 2000px) {
+    #formSign {
+        max-width: 450px;
+    }
+
+    #homeLink {
+        font-size: 1.2rem;
+    }
+    #logoPic {
+        max-height: 150px;
+        max-width: 150px;
+    }
+    #namePar {
+        font-size: 20px;
+    }
+
+    #emailPar {
+        font-size: 20px
+    }
+}
+
+#leftSection {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 20%;
+    min-width: 100px;
+    gap: 8px;
+}
+
+#centerSection {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.2rem;
+    position: absolute; 
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+#rightSection {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 20%;
+    min-width: 100px;
+}
+
+
+#pfpsmall {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+#leftSection p, #rightSection a {
+    margin: 0;
+    padding: 0;
+}
+
+
+@media screen and (max-width: 600px) {
+    #headerMenu {
+        padding: 5px;
+        height: auto;
+    }
+
+    #leftSection, #rightSection {
+        width: auto;
+        min-width: unset;
+    }
+
+    #centerSection {
+        font-size: 1rem;
+    }
+
+    #pfpsmall {
+        width: 30px;
+        height: 30px;
+    }
+
+    .signButton {
+        font-size: 0.9rem;
+        padding: 5px 8px;
+    }
+
+    
 }

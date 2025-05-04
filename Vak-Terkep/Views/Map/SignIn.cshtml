@@ -1,0 +1,37 @@
+﻿@model Account;
+@using Vak_Terkep.Models;
+@{
+    Layout = "~/Views/Shared/Layout2.cshtml";
+}
+
+<div id="formSign">
+    <h2>Bejelentkezés</h2>
+    
+    
+    @if (TempData["Message"] != null && TempData["Message"].ToString().ToLower() == "error")
+    {
+        <label name="error" class="alert alert-danger fs-5 d-block" style="font-weight: bold">Nem megfelelő email cím vagy jelszó!</label>
+    }
+    @if (TempData["Message"] != null && TempData["Message"].ToString().ToLower() == "blank")
+    {
+        <label name="error" class="alert alert-danger fs-5 d-block" style="font-weight: bold">Minden mező kitöltése kötelező!</label>
+    }
+    @using (Html.BeginForm("TryLogIn", "Accounts", FormMethod.Post))
+    {
+
+        <label id="formSignLabels" style="padding-left: 3px">Email:</label>
+        @Html.TextBoxFor(x => x.emailAddress, new { @id = "inputFields" }) <br>
+
+        <label id="formSignLabels">Jelszó:</label>
+        @Html.PasswordFor(x => x.userPassword, new { @id = "inputFields" }) <br>
+
+        <br>
+
+
+        <input type="submit" value="Bejelentkezés" class="signButton" style="font-size: 20pt" />
+        <br>
+
+        <br>
+        <p id="link"><a href="@Url.Action("SignUp", "Map")">Még nincs fiókom</a></p>
+    }
+</div>

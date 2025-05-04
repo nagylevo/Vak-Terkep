@@ -1,0 +1,55 @@
+﻿@using Vak_Terkep.Models;
+@model Account
+@{
+    Layout = "~/Views/Shared/Layout2.cshtml";
+}
+
+<div id="formSign">
+    <h2>Regisztráció</h2>
+
+    @if (TempData["Message"] != null && TempData["Message"].ToString().ToLower() == "email")
+    {
+        <label class="alert alert-danger fs-5 d-block" style="font-weight: bold">Ez az email cím már használatban van.</label>
+    }
+    @if (TempData["Message"] != null && TempData["Message"].ToString().ToLower() == "emailnoat")
+    {
+        <label class="alert alert-danger fs-5 d-block" style="font-weight: bold">Nem email címet adott meg.</label>
+    } 
+    @if (TempData["Message"] != null && TempData["Message"].ToString().ToLower() == "emailnocomhu")
+    {
+        <label class="alert alert-danger fs-5 d-block" style="font-weight: bold">Nem megfelelő email tartomány.</label>
+    }
+    @if (TempData["Message"] != null && TempData["Message"].ToString().ToLower() == "null")
+    {
+        <label class="alert alert-danger fs-5 d-block" style="font-weight: bold">Minden mező kitöltése kötelező!</label>
+    }
+    @if (TempData["Message"] != null && TempData["Message"].ToString().ToLower() == "tosmall")
+    {
+        <label class="alert alert-danger fs-5 d-block">
+           <u>
+                <strong> A jelszónak tartalmaznia kell:</strong>  <br />
+           </u> 
+            - Legalább 8 karaktert <br />
+            - Legalább 1 számot <br />
+        </label>
+    }
+    @using (Html.BeginForm("RegisterUser", "Accounts", FormMethod.Post))
+    {
+        <label id="formSignLabels" style="margin-left: 20px;padding-right:4px">Név:</label>
+        @Html.TextBoxFor(x => x.userName, new { @id = "inputFields", maxlength = "15" }) <br>
+
+        <label id="formSignLabels" style="padding-left: 3px">Email:</label>
+        @Html.TextBoxFor(x => x.emailAddress, new { @id = "inputFields", @Value = Model?.emailAddress, maxlength = "40" }) <br>
+
+        <label id="formSignLabels">Jelszó:</label>
+        @Html.PasswordFor(x => x.userPassword, new { @id = "inputFields" }) <br>
+
+        <br>
+
+        <input type="submit" value="Regisztráció" class="signButton" style="font-size: 20pt" />
+        <br>
+
+        <br>
+        <p id="link"><a href="@Url.Action("SignIn", "Map")">Már van fiókom</a></p>
+    }
+</div>

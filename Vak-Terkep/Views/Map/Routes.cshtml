@@ -1,0 +1,44 @@
+﻿@model List<Vak_Terkep.Models.SavedRoutesViewModel>
+@{
+    Layout = "~/Views/Shared/Layout2.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Mentett útvonalak";
+    var email = Context.Session.GetString("email");
+}
+
+<h2 style="color:white">Mentett útvonalak</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <p style="color:white">Nincs mentett útvonal.</p>
+
+    
+}
+
+else{
+    <table class="table" id="savedRoutesTable">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Emelet</th>
+                <th>Terem neve</th>
+                <th>Épület</th>
+                <th>Leírás</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var route in Model)
+            {
+                <tr>
+                    <td>@route.RouteId</td>
+                    <td>@route.FloorName</td>
+                    <td>@route.TextName</td>
+                    <td>@route.BuildingName</td>
+                    <td>@route.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

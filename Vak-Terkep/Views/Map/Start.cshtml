@@ -1,6 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Route
+<div id="form" style="width: 800px;height:fit-content;margin-top: 20pt">
+    <p id="kozepPar">
+        <img id="logoPic" src="logo.jpg" draggable="false" style="margin-top: 20px">
+    </p>
+    @if (TempData["Message"] != null && TempData["Message"].ToString().ToLower() == "noroute")
+    {
+        
+        
+        <label class="alert alert-danger fs-5 d-block">A választott helyiség nem létezik!</label>
+    } 
+    else
+    {
+        
+        
+    }
+    
 
+    <p style="line-height: 22pt"> Add meg a keresett helyiség nevét: </p>
+
+    @using (Html.BeginForm("Search", "Map", FormMethod.Post))
+    {
+        @Html.TextBoxFor(x => x.textName, new {@class = "placehold" ,placeholder = "Keresendő helyiség neve"})
+        <input type="submit" class="searchButton" value="Keresés" />
+    }
+    
+    <a href="/termek.pdf" target="_blank">
+        <button type="button" class="signButton" style="margin-top: 10pt;font-weight: bold">A helyiségek listája</button>
+    </a>
+
+</div>

@@ -1,0 +1,954 @@
+﻿@model Route
+@{
+    Layout = "~/Views/Shared/Layout2.cshtml";
+}
+
+<div id="form" style="max-width: fit-content">
+    <table>
+        <tr>
+            <td>
+                <canvas id="myCanvas" style="border:1px solid #000000; display: inline-block;"></canvas>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p style="text-align:center">
+                    @{
+                        var userName = Context.Session.GetString("userName");
+                    }
+                    @if (Model != null && !string.IsNullOrEmpty(Model.description))
+                    {
+                        <p style="font-size: 17pt; font-weight: bold">
+                        @Model.description
+                        </p>
+                        @if (!string.IsNullOrEmpty(userName))
+                        {
+                            <form asp-controller="Save" asp-action="RouteSaving" method="post">
+                                <input type="text" name="extraData" class="form-control" hidden value="@Model.textName" required />
+                                <button type="submit" class="btn btn-primary mt-2">Mentés</button>
+                            <button id="downloadBtn" class="btn btn-primary mt-2">Letöltés</button>
+                            </form>
+                        
+                        }
+                        else
+                        {
+                        <p style="font-style: italic; font-size: 15pt;">A mentés és letöltés funkciókhoz jelentkezz be!</p>
+                        }
+                    }
+                    else
+                    {
+                        <span>Hiba</span>
+                    }
+                </p>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        const routeModel = @Html.Raw(Json.Serialize(Model));
+        
+
+        if (routeModel && routeModel.textName) {
+            renderRouteOnCanvas(routeModel.textName);
+        } else {
+            console.error("No valid route model found or textName is missing.");
+        }
+
+        function renderRouteOnCanvas(routeTextName) {
+            const canvas = document.getElementById('myCanvas');
+            if (!canvas) {
+                console.warn("Canvas element not found. Skipping initialization.");
+                return;
+            }
+
+            const ctx = canvas.getContext('2d');
+
+            const originalWidth = 850;
+            const originalHeight = 550;
+
+            const rooms = [
+                {
+                    name: "Porta",
+                    background: '/A_foldsz.png',
+                    lines: [
+                        { start: { x: 0.7, y: 0.68 }, end: { x: 0.7, y: 0.82 } },
+                        { start: { x: 0.65, y: 0.68 }, end: { x: 0.7, y: 0.68 } },
+                        { start: { x: 0.65, y: 0.68 }, end: { x: 0.65, y: 0.77 } }
+                    ]
+                },
+                {
+                    name: "Büfé",
+                    background: '/A_foldsz.png',
+                    lines: [
+                        { start: { x: 0.7, y: 0.68 }, end: { x: 0.7, y: 0.82 } },
+                        { start: { x: 0.47, y: 0.68 }, end: { x: 0.7, y: 0.68 } },
+                        { start: { x: 0.47, y: 0.68 }, end: { x: 0.47, y: 0.74 } }
+                    ]
+                },
+                {
+                    name: "1-es terem",
+                    background: '/A_foldsz.png',
+                    lines: [
+                        { start: { x: 0.7, y: 0.68 }, end: { x: 0.7, y: 0.82 } },
+                        { start: { x: 0.24, y: 0.68 }, end: { x: 0.7, y: 0.68 } },
+                        { start: { x: 0.24, y: 0.68 }, end: { x: 0.24, y: 0.76 } }
+                    ]
+                },
+                {
+                    name: "2-es terem",
+                    background: '/A_foldsz.png',
+                    lines: [
+                        { start: { x: 0.7, y: 0.68 }, end: { x: 0.7, y: 0.82 } },
+                        { start: { x: 0.415, y: 0.68 }, end: { x: 0.7, y: 0.68 } },
+                        { start: { x: 0.415, y: 0.68 }, end: { x: 0.415, y: 0.75 } }
+                    ]
+                },
+                {
+                    name: "3-as terem",
+                    background: '/A_foldsz.png',
+                    lines: [
+                        { start: { x: 0.7, y: 0.68 }, end: { x: 0.7, y: 0.82 } },
+                        { start: { x: 0.51, y: 0.68 }, end: { x: 0.7, y: 0.68 } },
+                        { start: { x: 0.51, y: 0.68 }, end: { x: 0.51, y: 0.75 } }
+                    ]
+                },
+                {
+                    name: "Testnevelői tanári",
+                    background: '/A_foldsz.png',
+                    lines: [
+                        { start: { x: 0.7, y: 0.68 }, end: { x: 0.7, y: 0.82 } },
+                        { start: { x: 0.1, y: 0.68 }, end: { x: 0.7, y: 0.68 } },
+                        { start: { x: 0.1, y: 0.68 }, end: { x: 0.1, y: 0.75 } }
+                    ]
+                },
+                {
+                    name: "1. Testnevelői öltöző",
+                    background: '/A_foldsz.png',
+                    lines: [
+                        { start: { x: 0.7, y: 0.68 }, end: { x: 0.7, y: 0.82 } },
+                        { start: { x: 0.145, y: 0.68 }, end: { x: 0.7, y: 0.68 } },
+                        { start: { x: 0.145, y: 0.57 }, end: { x: 0.145, y: 0.68 } }
+                    ]
+                },
+                {
+                    name: "2. Testnevelői öltöző",
+                    background: '/A_foldsz.png',
+                    lines: [
+                        { start: { x: 0.7, y: 0.68 }, end: { x: 0.7, y: 0.82 } },
+                        { start: { x: 0.405, y: 0.68 }, end: { x: 0.7, y: 0.68 } },
+                        { start: { x: 0.405, y: 0.56 }, end: { x: 0.405, y: 0.68 } }
+                    ]
+                },
+                {
+                    name: "Tornaterem",
+                    background: '/A_foldsz.png',
+                    lines: [
+                        { start: { x: 0.7, y: 0.68 }, end: { x: 0.7, y: 0.82 } },
+                        { start: { x: 0.26, y: 0.68 }, end: { x: 0.7, y: 0.68 } },
+                        { start: { x: 0.26, y: 0.68 }, end: { x: 0.26, y: 0.45 } }
+                    ]
+                },
+                {
+                    name: "Edzőterem",
+                    background: '/A_foldsz.png',
+                    lines: [
+                        { start: { x: 0.7, y: 0.68 }, end: { x: 0.7, y: 0.82 } },
+                        { start: { x: 0.26, y: 0.68 }, end: { x: 0.7, y: 0.68 } },
+                        { start: { x: 0.26, y: 0.68 }, end: { x: 0.26, y: 0.37 } },
+                        { start: { x: 0.26, y: 0.37 }, end: { x: 0.33, y: 0.37 } },
+                        { start: { x: 0.33, y: 0.37 }, end: { x: 0.33, y: 0.42 } }
+                    ]
+                },
+                {
+                    name: "Szertár",
+                    background: '/A_foldsz.png',
+                    lines: [
+                        { start: { x: 0.7, y: 0.68 }, end: { x: 0.7, y: 0.82 } },
+                        { start: { x: 0.26, y: 0.68 }, end: { x: 0.7, y: 0.68 } },
+                        { start: { x: 0.26, y: 0.68 }, end: { x: 0.26, y: 0.37 } },
+                        { start: { x: 0.205, y: 0.37 }, end: { x: 0.26, y: 0.37 } },
+                        { start: { x: 0.205, y: 0.37 }, end: { x: 0.205, y: 0.42 } }
+                    ]
+                },
+                {
+                    name: "Történelem szertár",
+                    background: '/A_foldsz.png',
+                    lines: [
+                        { start: { x: 0.7, y: 0.68 }, end: { x: 0.7, y: 0.82 } },
+                        { start: { x: 0.315, y: 0.68 }, end: { x: 0.7, y: 0.68 } },
+                        { start: { x: 0.315, y: 0.68 }, end: { x: 0.315, y: 0.75 } }
+                    ]
+                },
+                {
+                    name: "Gyakorlati oktatásvezető irodája",
+                    background: '/A_foldsz.png',
+                    lines: [
+                        { start: { x: 0.7, y: 0.68 }, end: { x: 0.7, y: 0.82 } },
+                        { start: { x: 0.275, y: 0.68 }, end: { x: 0.7, y: 0.68 } },
+                        { start: { x: 0.275, y: 0.68 }, end: { x: 0.275, y: 0.75 } }
+                    ]
+                },
+                {
+                    name: "Tanári",
+                    background: '/A_1.png',
+                    lines: [
+                        { start: { x: 0.21, y: 0.6 }, end: { x: 0.79, y: 0.6 } }
+                    ]
+                },
+                {
+                    name: "Tanári WC",
+                    background: '/A_1.png',
+                    lines: [
+                        { start: { x: 0.12, y: 0.6 }, end: { x: 0.79, y: 0.6 } },
+                        { start: { x: 0.12, y: 0.54 }, end: { x: 0.12, y: 0.6 } }
+                    ]
+                },
+                {
+                    name: "Tanulmányi igazgatóhelyettes",
+                    background: '/A_1.png',
+                    lines: [
+                        { start: { x: 0.09, y: 0.6 }, end: { x: 0.79, y: 0.6 } },
+                        { start: { x: 0.09, y: 0.6 }, end: { x: 0.09, y: 0.7 } }
+                    ]
+                },
+                {
+                    name: "Titkárság",
+                    background: '/A_1.png',
+                    lines: [
+                        { start: { x: 0.23, y: 0.6 }, end: { x: 0.79, y: 0.6 } },
+                        { start: { x: 0.23, y: 0.6 }, end: { x: 0.23, y: 0.7 } }
+                    ]
+                },
+                {
+                    name: "Igazgatói iroda",
+                    background: '/A_1.png',
+                    lines: [
+                        { start: { x: 0.23, y: 0.6 }, end: { x: 0.79, y: 0.6 } },
+                        { start: { x: 0.23, y: 0.6 }, end: { x: 0.23, y: 0.75 } },
+                        { start: { x: 0.23, y: 0.75 }, end: { x: 0.27, y: 0.75 } }
+                    ]
+                },
+                {
+                    name: "Szakmai igazgatóhelyettesi iroda",
+                    background: '/A_1.png',
+                    lines: [
+                        { start: { x: 0.37, y: 0.6 }, end: { x: 0.79, y: 0.6 } },
+                        { start: { x: 0.37, y: 0.6 }, end: { x: 0.37, y: 0.71 } }
+                    ]
+                },
+                {
+                    name: "Pénztár",
+                    background: '/A_1.png',
+                    lines: [
+                        { start: { x: 0.436, y: 0.6 }, end: { x: 0.79, y: 0.6 } },
+                        { start: { x: 0.436, y: 0.6 }, end: { x: 0.436, y: 0.71 } }
+                    ]
+                },
+                {
+                    name: "Gazdasági iroda",
+                    background: '/A_1.png',
+                    lines: [
+                        { start: { x: 0.497, y: 0.6 }, end: { x: 0.79, y: 0.6 } },
+                        { start: { x: 0.497, y: 0.6 }, end: { x: 0.497, y: 0.71 } }
+                    ]
+                },
+                {
+                    name: "Nevelési igazgatóhelyettesi iroda",
+                    background: '/A_1.png',
+                    lines: [
+                        { start: { x: 0.565, y: 0.6 }, end: { x: 0.79, y: 0.6 } },
+                        { start: { x: 0.565, y: 0.6 }, end: { x: 0.565, y: 0.71 } }
+                    ]
+                },
+                {
+                    name: "Lelkipásztor szoba",
+                    background: '/A_1.png',
+                    lines: [
+                        { start: { x: 0.645, y: 0.6 }, end: { x: 0.79, y: 0.6 } },
+                        { start: { x: 0.645, y: 0.6 }, end: { x: 0.645, y: 0.71 } }
+                    ]
+                },
+                {
+                    name: "Angol szertár",
+                    background: '/A_1.png',
+                    lines: [
+                        { start: { x: 0.689, y: 0.6 }, end: { x: 0.79, y: 0.6 } },
+                        { start: { x: 0.689, y: 0.6 }, end: { x: 0.689, y: 0.71 } }
+                    ]
+                },
+                {
+                    name: "5-ös terem",
+                    background: '/A_1.png',
+                    lines: [
+                        { start: { x: 0.727, y: 0.6 }, end: { x: 0.79, y: 0.6 } },
+                        { start: { x: 0.727, y: 0.6 }, end: { x: 0.727, y: 0.71 } }
+                    ]
+                },
+                {
+                    name: "Lelátó",
+                    background: '/A_1.png',
+                    lines: [
+                        { start: { x: 0.315, y: 0.6 }, end: { x: 0.79, y: 0.6 } },
+                        { start: { x: 0.315, y: 0.6 }, end: { x: 0.315, y: 0.45 } }
+                    ]
+                },
+                {
+                    name: "M-06/E esztergaműhely",
+                    background: '/B_alags.png',
+                    lines: [
+                        { start: { x: 0.67, y: 0.56 }, end: { x: 0.67, y: 0.72 } },
+                        { start: { x: 0.25, y: 0.56 }, end: { x: 0.67, y: 0.56 } }
+                    ]
+                },
+                {
+                    name: "M-06/M vegyes forgácsműhely",
+                    background: '/B_alags.png',
+                    lines: [
+                        { start: { x: 0.67, y: 0.56 }, end: { x: 0.67, y: 0.72 } },
+                        { start: { x: 0.225, y: 0.56 }, end: { x: 0.67, y: 0.56 } },
+                        { start: { x: 0.225, y: 0.56 }, end: { x: 0.225, y: 0.64 } }
+                    ]
+                },
+                {
+                    name: "Daraboló műhely",
+                    background: '/B_alags.png',
+                    lines: [
+                        { start: { x: 0.67, y: 0.56 }, end: { x: 0.67, y: 0.72 } },
+                        { start: { x: 0.34, y: 0.56 }, end: { x: 0.67, y: 0.56 } },
+                        { start: { x: 0.34, y: 0.56 }, end: { x: 0.34, y: 0.49 } }
+                    ]
+                },
+                {
+                    name: "M-07 Kézi forgácsműhely",
+                    background: '/B_alags.png',
+                    lines: [
+                        { start: { x: 0.67, y: 0.56 }, end: { x: 0.67, y: 0.72 } },
+                        { start: { x: 0.41, y: 0.56 }, end: { x: 0.67, y: 0.56 } },
+                        { start: { x: 0.41, y: 0.56 }, end: { x: 0.41, y: 0.49 } }
+                    ]
+                },
+                {
+                    name: "Raktár",
+                    background: '/B_alags.png',
+                    lines: [
+                        { start: { x: 0.67, y: 0.56 }, end: { x: 0.67, y: 0.72 } },
+                        { start: { x: 0.50, y: 0.56 }, end: { x: 0.67, y: 0.56 } },
+                        { start: { x: 0.50, y: 0.56 }, end: { x: 0.50, y: 0.49 } }
+                    ]
+                },
+                {
+                    name: "Szerszám kiadó",
+                    background: '/B_alags.png',
+                    lines: [
+                        { start: { x: 0.67, y: 0.56 }, end: { x: 0.67, y: 0.72 } },
+                        { start: { x: 0.57, y: 0.56 }, end: { x: 0.67, y: 0.56 } },
+                        { start: { x: 0.57, y: 0.56 }, end: { x: 0.57, y: 0.49 } }
+                    ]
+                },
+                {
+                    name: "Gyakorlati fiú öltöző",
+                    background: '/B_alags.png',
+                    lines: [
+                        { start: { x: 0.66, y: 0.48 }, end: { x: 0.66, y: 0.72 } }
+                    ]
+                },
+                {
+                    name: "Gyakorlati leány öltöző",
+                    background: '/B_alags.png',
+                    lines: [
+                        { start: { x: 0.67, y: 0.56 }, end: { x: 0.67, y: 0.72 } },
+                        { start: { x: 0.67, y: 0.56 }, end: { x: 0.775, y: 0.56 } },
+                        { start: { x: 0.775, y: 0.56 }, end: { x: 0.775, y: 0.49 } }
+                    ]
+                },
+                {
+                    name: "Asztalos műhely",
+                    background: '/B_alags.png',
+                    lines: [
+                        { start: { x: 0.67, y: 0.56 }, end: { x: 0.67, y: 0.72 } },
+                        { start: { x: 0.67, y: 0.56 }, end: { x: 0.835, y: 0.56 } },
+                        { start: { x: 0.835, y: 0.56 }, end: { x: 0.835, y: 0.49 } }
+                    ]
+                },
+                {
+                    name: "TMK műhely",
+                    background: '/B_alags.png',
+                    lines: [
+                        { start: { x: 0.67, y: 0.56 }, end: { x: 0.67, y: 0.72 } },
+                        { start: { x: 0.67, y: 0.56 }, end: { x: 0.81, y: 0.56 } }
+                    ]
+                },
+                {
+                    name: "TMK öltöző",
+                    background: '/B_alags.png',
+                    lines: [
+                        { start: { x: 0.67, y: 0.56 }, end: { x: 0.67, y: 0.72 } },
+                        { start: { x: 0.67, y: 0.56 }, end: { x: 0.785, y: 0.56 } },
+                        { start: { x: 0.785, y: 0.56 }, end: { x: 0.785, y: 0.70 } },
+                        { start: { x: 0.785, y: 0.70 }, end: { x: 0.81, y: 0.70 } }
+                    ]
+                },
+                {
+                    name: "CNC oktató műhely",
+                    background: '/B_alags.png',
+                    lines: [
+                        { start: { x: 0.67, y: 0.56 }, end: { x: 0.67, y: 0.72 } },
+                        { start: { x: 0.49, y: 0.56 }, end: { x: 0.67, y: 0.56 } },
+                        { start: { x: 0.49, y: 0.56 }, end: { x: 0.49, y: 0.64 } }
+                    ]
+                },
+                {
+                    name: "27-es terem",
+                    background: '/B_felem.png',
+                    lines: [
+                        { start: { x: 0.72, y: 0.57 }, end: { x: 0.72, y: 0.70 } },
+                        { start: { x: 0.16, y: 0.57 }, end: { x: 0.72, y: 0.57 } },
+                        { start: { x: 0.16, y: 0.57 }, end: { x: 0.16, y: 0.65 } }
+                    ]
+                },
+                {
+                    name: "Tankönyv raktár",
+                    background: '/B_felem.png',
+                    lines: [
+                        { start: { x: 0.72, y: 0.57 }, end: { x: 0.72, y: 0.70 } },
+                        { start: { x: 0.13, y: 0.57 }, end: { x: 0.72, y: 0.57 } }
+                    ]
+                },
+                {
+                    name: "Tanácskozó",
+                    background: '/B_felem.png',
+                    lines: [
+                        { start: { x: 0.72, y: 0.57 }, end: { x: 0.72, y: 0.70 } },
+                        { start: { x: 0.22, y: 0.57 }, end: { x: 0.72, y: 0.57 } },
+                        { start: { x: 0.22, y: 0.57 }, end: { x: 0.22, y: 0.65 } }
+                    ]
+                },
+                {
+                    name: "28-as terem",
+                    background: '/B_felem.png',
+                    lines: [
+                        { start: { x: 0.72, y: 0.57 }, end: { x: 0.72, y: 0.70 } },
+                        { start: { x: 0.155, y: 0.57 }, end: { x: 0.72, y: 0.57 } },
+                        { start: { x: 0.155, y: 0.57 }, end: { x: 0.155, y: 0.5 } }
+                    ]
+                },
+                {
+                    name: "29-es terem",
+                    background: '/B_felem.png',
+                    lines: [
+                        { start: { x: 0.72, y: 0.57 }, end: { x: 0.72, y: 0.70 } },
+                        { start: { x: 0.215, y: 0.57 }, end: { x: 0.72, y: 0.57 } },
+                        { start: { x: 0.215, y: 0.57 }, end: { x: 0.215, y: 0.5 } }
+                    ]
+                },
+                {
+                    name: "Média terem",
+                    background: '/B_felem.png',
+                    lines: [
+                        { start: { x: 0.72, y: 0.57 }, end: { x: 0.72, y: 0.70 } },
+                        { start: { x: 0.365, y: 0.57 }, end: { x: 0.72, y: 0.57 } },
+                        { start: { x: 0.365, y: 0.57 }, end: { x: 0.365, y: 0.5 } }
+                    ]
+                },
+                {
+                    name: "9-es terem",
+                    background: '/B_felem.png',
+                    lines: [
+                        { start: { x: 0.72, y: 0.57 }, end: { x: 0.72, y: 0.70 } },
+                        { start: { x: 0.465, y: 0.57 }, end: { x: 0.72, y: 0.57 } },
+                        { start: { x: 0.465, y: 0.57 }, end: { x: 0.465, y: 0.5 } }
+                    ]
+                },
+                {
+                    name: "1. Fizika szertár",
+                    background: '/B_felem.png',
+                    lines: [
+                        { start: { x: 0.72, y: 0.57 }, end: { x: 0.72, y: 0.70 } },
+                        { start: { x: 0.54, y: 0.57 }, end: { x: 0.72, y: 0.57 } },
+                        { start: { x: 0.54, y: 0.57 }, end: { x: 0.54, y: 0.5 } }
+                    ]
+                },
+                {
+                    name: "8-as terem",
+                    background: '/B_felem.png',
+                    lines: [
+                        { start: { x: 0.72, y: 0.57 }, end: { x: 0.72, y: 0.70 } },
+                        { start: { x: 0.66, y: 0.57 }, end: { x: 0.72, y: 0.57 } },
+                        { start: { x: 0.66, y: 0.57 }, end: { x: 0.66, y: 0.5 } }
+                    ]
+                },
+                {
+                    name: "7-es terem",
+                    background: '/B_felem.png',
+                    lines: [
+                        { start: { x: 0.72, y: 0.57 }, end: { x: 0.72, y: 0.70 } },
+                        { start: { x: 0.77, y: 0.57 }, end: { x: 0.72, y: 0.57 } },
+                        { start: { x: 0.77, y: 0.57 }, end: { x: 0.77, y: 0.5 } }
+                    ]
+                },
+                {
+                    name: "6-os terem",
+                    background: '/B_felem.png',
+                    lines: [
+                        { start: { x: 0.72, y: 0.57 }, end: { x: 0.72, y: 0.70 } },
+                        { start: { x: 0.87, y: 0.57 }, end: { x: 0.72, y: 0.57 } },
+                        { start: { x: 0.87, y: 0.57 }, end: { x: 0.87, y: 0.5 } }
+                    ]
+                },
+                {
+                    name: "Matek szertár",
+                    background: '/B_felem.png',
+                    lines: [
+                        { start: { x: 0.72, y: 0.57 }, end: { x: 0.72, y: 0.70 } },
+                        { start: { x: 0.92, y: 0.57 }, end: { x: 0.72, y: 0.57 } },
+                        { start: { x: 0.92, y: 0.57 }, end: { x: 0.92, y: 0.5 } }
+                    ]
+                },
+                {
+                    name: "10-es terem",
+                    background: '/B_felem.png',
+                    lines: [
+                        { start: { x: 0.72, y: 0.57 }, end: { x: 0.72, y: 0.70 } },
+                        { start: { x: 0.43, y: 0.57 }, end: { x: 0.72, y: 0.57 } },
+                        { start: { x: 0.43, y: 0.57 }, end: { x: 0.43, y: 0.64 } }
+                    ]
+                },
+                {
+                    name: "11-es terem",
+                    background: '/B_felem.png',
+                    lines: [
+                        { start: { x: 0.72, y: 0.57 }, end: { x: 0.72, y: 0.70 } },
+                        { start: { x: 0.58, y: 0.57 }, end: { x: 0.72, y: 0.57 } },
+                        { start: { x: 0.58, y: 0.57 }, end: { x: 0.58, y: 0.64 } }
+                    ]
+                },
+                {
+                    name: "Iskola rádió",
+                    background: '/B_felem.png',
+                    lines: [
+                        { start: { x: 0.72, y: 0.57 }, end: { x: 0.72, y: 0.70 } },
+                        { start: { x: 0.81, y: 0.57 }, end: { x: 0.72, y: 0.57 } },
+                        { start: { x: 0.81, y: 0.57 }, end: { x: 0.81, y: 0.64 } }
+                    ]
+                },
+                {
+                    name: 'Számítástechnika szertár',
+                    background: '/C_2.png',
+                    lines: [
+                        { start: { x: 0.50, y: 0.67 }, end: { x: 0.55, y: 0.67 } },
+                        { start: { x: 0.50, y: 0.67 }, end: { x: 0.50, y: 0.56 } }
+                    ]
+                },
+                {
+                    name: '25-ös terem',
+                    background: '/C_2.png',
+                    lines: [
+                        { start: { x: 0.50, y: 0.67 }, end: { x: 0.55, y: 0.67 } },
+                        { start: { x: 0.50, y: 0.67 }, end: { x: 0.50, y: 0.725 } },
+                        { start: { x: 0.40, y: 0.725 }, end: { x: 0.50, y: 0.725 } }
+                    ]
+                },
+                {
+                    name: '23-as terem',
+                    background: '/C_2.png',
+                    lines: [
+                        { start: { x: 0.44, y: 0.67 }, end: { x: 0.55, y: 0.67 } },
+                        { start: { x: 0.44, y: 0.67 }, end: { x: 0.44, y: 0.56 } }
+                    ]
+                },
+                {
+                    name: '24-es terem',
+                    background: '/C_2.png',
+                    lines: [
+                        { start: { x: 0.50, y: 0.67 }, end: { x: 0.55, y: 0.67 } },
+                        { start: { x: 0.50, y: 0.67 }, end: { x: 0.50, y: 0.62 } },
+                        { start: { x: 0.50, y: 0.62 }, end: { x: 0.555, y: 0.62 } },
+                        { start: { x: 0.555, y: 0.62 }, end: { x: 0.555, y: 0.55 } }
+                    ]
+                },
+                {
+                    name: '22-es terem',
+                    background: '/C_1.png',
+                    lines: [
+                        { start: { x: 0.50, y: 0.67 }, end: { x: 0.55, y: 0.67 } },
+                        { start: { x: 0.50, y: 0.67 }, end: { x: 0.50, y: 0.62 } },
+                        { start: { x: 0.50, y: 0.62 }, end: { x: 0.555, y: 0.62 } },
+                        { start: { x: 0.555, y: 0.62 }, end: { x: 0.555, y: 0.55 } }
+                    ]
+                },
+                {
+                    name: '21-es terem',
+                    background: '/C_1.png',
+                    lines: [
+                        { start: { x: 0.44, y: 0.67 }, end: { x: 0.55, y: 0.67 } },
+                        { start: { x: 0.44, y: 0.67 }, end: { x: 0.44, y: 0.54 } }
+                    ]
+                },
+                {
+                    name: '30-as terem',
+                    background: '/C_1.png',
+                    lines: [
+                        { start: { x: 0.50, y: 0.67 }, end: { x: 0.55, y: 0.67 } },
+                        { start: { x: 0.50, y: 0.67 }, end: { x: 0.50, y: 0.71 } },
+                        { start: { x: 0.40, y: 0.71 }, end: { x: 0.50, y: 0.71 } }
+                    ]
+                },
+                {
+                    name: 'Informatika központ',
+                    background: '/C_1.png',
+                    lines: [
+                        { start: { x: 0.50, y: 0.67 }, end: { x: 0.55, y: 0.67 } },
+                        { start: { x: 0.50, y: 0.67 }, end: { x: 0.50, y: 0.56 } }
+                    ]
+                },
+                {
+                    name: 'M03 hegesztő műhely',
+                    background: '/C_fold.png',
+                    lines: [
+                        { start: { x: 0.50, y: 0.66 }, end: { x: 0.55, y: 0.66 } },
+                        { start: { x: 0.50, y: 0.66 }, end: { x: 0.50, y: 0.61 } },
+                        { start: { x: 0.50, y: 0.61 }, end: { x: 0.61, y: 0.61 } },
+                        { start: { x: 0.61, y: 0.61 }, end: { x: 0.61, y: 0.55 } }
+                    ]
+                },
+                {
+                    name: 'M05 szerelő műhely',
+                    background: '/C_fold.png',
+                    lines: [
+                        { start: { x: 0.445, y: 0.66 }, end: { x: 0.55, y: 0.66 } },
+                        { start: { x: 0.445, y: 0.66 }, end: { x: 0.445, y: 0.54 } }
+                    ]
+                },
+                {
+                    name: 'Szerelő előkészítő',
+                    background: '/C_fold.png',
+                    lines: [
+                        { start: { x: 0.445, y: 0.66 }, end: { x: 0.55, y: 0.66 } },
+                        { start: { x: 0.445, y: 0.66 }, end: { x: 0.445, y: 0.695 } },
+                        { start: { x: 0.40, y: 0.695 }, end: { x: 0.445, y: 0.695 } }
+                    ]
+                },
+                {
+                    name: 'Könyvtár',
+                    background: '/B_3.png',
+                    lines: [
+                        { start: { x: 0.735, y: 0.695 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.735, y: 0.58 }, end: { x: 0.90, y: 0.58 } }
+                    ]
+                },
+                {
+                    name: 'Rádió',
+                    background: '/B_3.png',
+                    lines: [
+                        { start: { x: 0.735, y: 0.695 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.735, y: 0.58 }, end: { x: 0.82, y: 0.58 } },
+                        { start: { x: 0.82, y: 0.58 }, end: { x: 0.82, y: 0.66 } }
+                    ]
+                },
+                {
+                    name: '17-es terem',
+                    background: '/B_3.png',
+                    lines: [
+                        { start: { x: 0.735, y: 0.695 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.735, y: 0.58 }, end: { x: 0.845, y: 0.58 } },
+                        { start: { x: 0.845, y: 0.58 }, end: { x: 0.845, y: 0.50 } }
+                    ]
+                },
+                {
+                    name: '18-as terem',
+                    background: '/B_3.png',
+                    lines: [
+                        { start: { x: 0.735, y: 0.695 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.735, y: 0.58 }, end: { x: 0.705, y: 0.58 } },
+                        { start: { x: 0.705, y: 0.58 }, end: { x: 0.705, y: 0.50 } }
+                    ]
+                },
+                {
+                    name: 'Magyar szertár',
+                    background: '/B_3.png',
+                    lines: [
+                        { start: { x: 0.735, y: 0.695 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.565, y: 0.58 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.565, y: 0.58 }, end: { x: 0.565, y: 0.50 } }
+                    ]
+                },
+                {
+                    name: '19-es terem',
+                    background: '/B_3.png',
+                    lines: [
+                        { start: { x: 0.735, y: 0.695 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.51, y: 0.58 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.51, y: 0.58 }, end: { x: 0.51, y: 0.50 } }
+                    ]
+                },
+                {
+                    name: '20-as terem',
+                    background: '/B_3.png',
+                    lines: [
+                        { start: { x: 0.735, y: 0.695 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.51, y: 0.58 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.51, y: 0.58 }, end: { x: 0.51, y: 0.66 } }
+                    ]
+                },
+                {
+                    name: '2. Fizika szertár',
+                    background: '/B_3.png',
+                    lines: [
+                        { start: { x: 0.735, y: 0.695 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.436, y: 0.58 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.436, y: 0.58 }, end: { x: 0.436, y: 0.66 } }
+                    ]
+                },
+                {
+                    name: 'Technológiai mérőlabor',
+                    background: '/B_3.png',
+                    lines: [
+                        { start: { x: 0.735, y: 0.695 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.254, y: 0.58 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.254, y: 0.58 }, end: { x: 0.254, y: 0.66 } }
+                    ]
+                },
+                {
+                    name: 'Számítógépes mérőlabor',
+                    background: '/B_3.png',
+                    lines: [
+                        { start: { x: 0.735, y: 0.695 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.14, y: 0.58 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.14, y: 0.58 }, end: { x: 0.14, y: 0.66 } }
+                    ]
+                },
+                {
+                    name: 'Elektronikai mérőlabor',
+                    background: '/B_3.png',
+                    lines: [
+                        { start: { x: 0.735, y: 0.695 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.22, y: 0.58 }, end: { x: 0.735, y: 0.58 } },
+                        { start: { x: 0.22, y: 0.58 }, end: { x: 0.22, y: 0.50 } }
+                    ]
+                },
+                {
+                    name: '13-as terem',
+                    background: '/B_2.png',
+                    lines: [
+                        { start: { x: 0.725, y: 0.695 }, end: { x: 0.725, y: 0.50 } }
+
+                    ]
+                },
+                {
+                    name: '16-os terem',
+                    background: '/B_2.png',
+                    lines: [
+                        { start: { x: 0.725, y: 0.695 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.57, y: 0.575 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.57, y: 0.65 }, end: { x: 0.57, y: 0.575 } }
+
+                    ]
+                },
+                {
+                    name: 'Tanári teakonyha',
+                    background: '/B_2.png',
+                    lines: [
+                        { start: { x: 0.725, y: 0.695 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.725, y: 0.575 }, end: { x: 0.805, y: 0.575 } },
+                        { start: { x: 0.805, y: 0.66 }, end: { x: 0.805, y: 0.575 } }
+
+                    ]
+                },
+                {
+                    name: 'DÖK helyiség',
+                    background: '/B_2.png',
+                    lines: [
+                        { start: { x: 0.725, y: 0.695 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.725, y: 0.575 }, end: { x: 0.89, y: 0.575 } }
+
+                    ]
+                },
+                {
+                    name: '15-ös terem',
+                    background: '/B_2.png',
+                    lines: [
+                        { start: { x: 0.725, y: 0.695 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.425, y: 0.575 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.425, y: 0.65 }, end: { x: 0.425, y: 0.575 } }
+
+                    ]
+                },
+                {
+                    name: '12-es terem',
+                    background: '/B_2.png',
+                    lines: [
+                        { start: { x: 0.725, y: 0.695 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.725, y: 0.575 }, end: { x: 0.835, y: 0.575 } },
+                        { start: { x: 0.835, y: 0.575 }, end: { x: 0.835, y: 0.485 } }
+                    ]
+                },
+                {
+                    name: 'Gépész szertár',
+                    background: '/B_2.png',
+                    lines: [
+                        { start: { x: 0.725, y: 0.695 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.725, y: 0.575 }, end: { x: 0.78, y: 0.575 } },
+                        { start: { x: 0.78, y: 0.575 }, end: { x: 0.78, y: 0.485 } }
+                    ]
+                },
+                {
+                    name: 'Vill. szertár',
+                    background: '/B_2.png',
+                    lines: [
+                        { start: { x: 0.725, y: 0.695 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.53, y: 0.575 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.53, y: 0.50 }, end: { x: 0.53, y: 0.575 } }
+                    ]
+                },
+                {
+                    name: '14-es terem',
+                    background: '/B_2.png',
+                    lines: [
+                        { start: { x: 0.725, y: 0.695 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.455, y: 0.575 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.455, y: 0.50 }, end: { x: 0.455, y: 0.575 } }
+                    ]
+                },
+                {
+                    name: 'Erősáramú labor',
+                    background: '/B_2.png',
+                    lines: [
+                        { start: { x: 0.725, y: 0.695 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.364, y: 0.575 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.364, y: 0.50 }, end: { x: 0.364, y: 0.575 } }
+                    ]
+                },
+                {
+                    name: 'Technológiai előkészítő',
+                    background: '/B_2.png',
+                    lines: [
+                        { start: { x: 0.725, y: 0.695 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.284, y: 0.575 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.284, y: 0.50 }, end: { x: 0.284, y: 0.575 } }
+                    ]
+                },
+                {
+                    name: 'Műhely szertár',
+                    background: '/B_2.png',
+                    lines: [
+                        { start: { x: 0.725, y: 0.695 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.228, y: 0.575 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.228, y: 0.50 }, end: { x: 0.228, y: 0.575 } }
+                    ]
+                },
+                {
+                    name: 'M08/3 vill. műhely',
+                    background: '/B_2.png',
+                    lines: [
+                        { start: { x: 0.725, y: 0.695 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.228, y: 0.575 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.228, y: 0.54 }, end: { x: 0.228, y: 0.575 } },
+                        { start: { x: 0.228, y: 0.54 }, end: { x: 0.17, y: 0.54 } }
+                    ]
+                },
+                {
+                    name: 'M08/2 vill. műhely',
+                    background: '/B_2.png',
+                    lines: [
+                        { start: { x: 0.725, y: 0.695 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.228, y: 0.575 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.228, y: 0.605 }, end: { x: 0.228, y: 0.575 } },
+                        { start: { x: 0.228, y: 0.605 }, end: { x: 0.17, y: 0.605 } }
+                    ]
+                },
+                {
+                    name: 'M08/1 vill. műhely',
+                    background: '/B_2.png',
+                    lines: [
+                        { start: { x: 0.725, y: 0.695 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.228, y: 0.575 }, end: { x: 0.725, y: 0.575 } },
+                        { start: { x: 0.228, y: 0.66 }, end: { x: 0.228, y: 0.575 } },
+
+                    ]
+                },
+                {
+                    name: "Elektromos helyiség",
+                    background: '/B_alags.png',
+                    lines: [
+                        { start: { x: 0.67, y: 0.545 }, end: { x: 0.67, y: 0.72 } },
+                        { start: { x: 0.67, y: 0.545 }, end: { x: 0.88, y: 0.545 } },
+                        { start: { x: 0.88, y: 0.545 }, end: { x: 0.88, y: 0.48 } }
+                    ]
+                }
+            ];
+
+            const currentRoom = rooms.find(rooms => rooms.name == routeModel.textName)
+
+
+            if (!currentRoom) {
+                console.error("Route not found in rooms.");
+                return;
+            }
+
+            
+            let currentRoomIndex = rooms.indexOf(currentRoom);
+            console.log(currentRoomIndex);
+
+            function resizeCanvas() {
+                const aspectRatio = originalWidth / originalHeight;
+                const newWidth = Math.min(window.innerWidth * 0.9, originalWidth);
+                const newHeight = newWidth / aspectRatio;
+
+                canvas.width = newWidth;
+                canvas.height = newHeight;
+
+                draw();
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                const room = rooms[currentRoomIndex];
+                const img = new Image();
+
+                img.onload = function () {
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    drawLines();
+                };
+
+                img.onerror = function () {
+                    console.error("A háttérkép betöltése sikertelen volt:", room.background);
+                };
+
+                img.src = room.background;
+            }
+
+            function drawLines() {
+                ctx.strokeStyle = 'red';
+                ctx.lineWidth = 5;
+
+                const lines = rooms[currentRoomIndex].lines;
+
+                lines.forEach(line => {
+                    ctx.beginPath();
+                    ctx.moveTo(canvas.width * line.start.x, canvas.height * line.start.y);
+                    ctx.lineTo(canvas.width * line.end.x, canvas.height * line.end.y);
+                    ctx.stroke();
+                });
+            }
+
+            $('#downloadBtn').click(function () {
+                const link = document.createElement('a');
+                link.download = 'canvas_image.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            console.log(rooms[currentRoomIndex].name);
+            console.log(routeModel.textName)
+            
+        }
+    });
+</script>

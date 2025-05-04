@@ -1,0 +1,94 @@
+Porta | A épület | Földszint | A főbejáraton belépve fordulj balra és ott találod.
+Büfé | A épület | Földszint | A főbejáraton belépve fordulj balra, majd menj egyenesen, balra találod meg.
+1-es terem | A épület | Földszint | A főbejáraton belépve fordulj balra, majd menj egyenesen, balra találod meg.
+2-es terem | A épület | Földszint | A főbejáraton belépve fordulj balra, majd menj egyenesen, balra találod meg.
+3-as terem | A épület | Földszint | A főbejáraton belépve fordulj balra, majd menj egyenesen, balra találod meg.
+Testnevelői tanári | A épület | Földszint | A főbejáraton belépve fordulj balra, majd menj egyenesen, balra találod meg.
+1. Testnevelői öltöző | A épület | Földszint | A főbejáraton belépve fordulj balra, majd menj egyenesen, jobbra találod meg.
+2. Testnevelői öltöző | A épület | Földszint | A főbejáraton belépve fordulj balra, majd menj egyenesen, jobbra találod meg.
+Tornaterem | A épület | Földszint | A főbejáraton belépve fordulj balra, majd menj egyenesen, jobbra találod meg.
+Edzőterem | A épület | Földszint | A főbejáraton belépve fordulj balra, majd menj egyenesen, jobbra menj be a tornaterembe, majd bent, jobbra találod meg.
+Szertár | A épület | Földszint | A főbejáraton belépve fordulj balra, majd menj egyenesen, jobbra menj be a tornaterembe, majd bent, balra találod meg.
+Történelem szertár | A épület | Földszint | A főbejáraton belépve fordulj balra, majd menj egyenesen, balra találod meg.
+Gyakorlati oktatásvezető irodája | A épület | Földszint | A főbejáraton belépve fordulj balra, majd menj egyenesen, balra találod meg.
+Tanári | A épület | 1. emelet | A főlépcsőtől menj egyenesen, majd bal oldalt találod meg, a folyosó végén.
+Tanári WC | A épület | 1. emelet | A főlépcsőtől menj egyenesen, majd jobb oldalt találod meg, a folyosó végén.
+Tanulmányi igazgatóhelyettes | A épület | 1. emelet | A főlépcsőtől menj egyenesen, majd bal oldalt találod meg, a folyosó legvégén.  
+Titkárság | A épület | 1. emelet | A főlépcsőtől menj egyenesen, majd bal oldalt találod meg, a folyosó végén.
+Igazgatói iroda | A épület | 1. emelet | A főlépcsőtől menj egyenesen, majd bal oldalt találod meg, a folyosó vége felé.
+Szakmai igazgatóhelyettesi iroda | A épület | 1. emelet | A főlépcsőtől menj egyenesen, majd bal oldalt találod meg, a folyosó vége felé. 
+Pénztár | A épület | 1. emelet |  A főlépcsőtől menj egyenesen, majd bal oldalt találod meg, a folyosó közepe felé.
+Gazdasági iroda | A épület | 1. emelet | A főlépcsőtől menj egyenesen, majd bal oldalt találod meg, a folyosó közepe felé.
+Nevelési igazgatóhelyettesi iroda | A épület | 1. emelet | A főlépcsőtől menj egyenesen, majd bal oldalt találod meg, a folyosó közepe felé.
+Lelkipásztor szoba | A épület | 1. emelet | A főlépcsőtől menj egyenesen, majd bal oldalt találod meg, a folyosó eleje felé.
+Angol szertár | A épület | 1. emelet | A főlépcsőtől menj egyenesen, majd bal oldalt találod meg, a folyosó elején.
+5-ös terem | A épület | 1. emelet |  A főlépcsőtől menj egyenesen, majd bal oldalt találod meg, a folyosó legelején.
+Lelátó | A épület | 1. emelet | A főlépcsőtől menj egyenesen, majd jobb oldalt találod meg, a folyosó vége felé.
+M-06/E esztergaműhely | B épület | Alagsor | A főlépcsőnél fordulj balra, majd menj egyenesen a folyosó legvégén találod meg.
+M-06/M vegyes forgácsműhely | B épület | Alagsor | A főlépcsőnél fordulj balra, majd menj egyenesen a folyosó legvégén balra találod meg.
+Daraboló műhely | B épület | Alagsor |  A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó vége felé jobbra találod meg.
+M-07 Kézi forgácsműhely | B épület | Alagsor | A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó vége felé jobbra találod meg.
+Raktár | B épület | Alagsor | A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó közepe felé jobbra találod meg.
+Szerszám kiadó | B épület | Alagsor | A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó közepe felé jobbra találod meg.
+Gyakorlati fiú öltöző | B épület | Alagsor | A főlépcsőnél menj egyenesen.
+Elektromos helyiség | B épület | Alagsor | A főlépcsőnél jobbra fordulva és belépve a műhelybe a bal oldalon a második ajtónál találod.
+Mosdó | B épület | Alagsor | A főlépcsőnél menj egyenesen. 
+Gyakorlati leány öltöző | B épület | Alagsor | A főlépcsőnél fordulj jobbra, majd menj kicsit egyenesen, a folyosó vége felé balra találod meg.
+Asztalos műhely | B épület | Alagsor | A főlépcsőnél fordulj jobbra, majd menj egyenesen a folyosó legvégéig, majd a TMK műhelyben balra találod meg.
+TMK műhely | B épület | Alagsor | A főlépcsőnél fordulj jobbra, majd menj egyenesen, a folyosó legvégén találod meg.
+TMK öltöző | B épület | Alagsor | A főlépcsőnél fordulj jobbra, majd menj egyenesen a folyosó legvégéig, majd a TMK műhely mellett jobbra találod meg.
+Testnevelői öltöző | B épület | Alagsor | A főlépcsőnél fordulj jobbra.
+CNC oktató műhely | B épület | Alagsor | A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó közepe felé balra találod meg.
+27-es terem | B épület | félemelet | A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó legvégén balra találod meg.
+Tankönyv raktár | B épület | félemelet | A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó legvégén találod meg.
+Tanácskozó | B épület | félemelet | A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó legvége felé balra találod meg.
+28-as terem | B épület | félemelet | A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó legvégén jobbra találod meg.
+29-es terem | B épület | félemelet | A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó legvége felé balra találod meg.
+Média terem | B épület | félemelet | A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó vége felé jobbra találod meg.
+9-es terem | B épület | félemelet | A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó közepe felé jobbra találod meg.
+1. Fizika szertár | B épület | félemelet | A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó közepe felé jobbra találod meg.
+8-as terem | B épület | félemelet | A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó eleje felé jobbra találod meg.
+7-es terem | B épület | félemelet | A főlépcsőnél menj egyenesen.
+6-os terem | B épület | félemelet | A főlépcsőnél fordulj jobbra, majd menj egyenesen, a folyosó vége felé balra találod meg.
+Matek szertár | B épület | félemelet | A főlépcsőnél fordulj jobbra, majd menj egyenesen, a folyosó legvégén balra találod meg.
+10-es terem | B épület | félemelet | A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó közepe felé balra találod meg.
+11-es terem | B épület | félemelet | A főlépcsőnél fordulj balra, majd menj egyenesen, a folyosó közepe felé balra találod meg.
+Iskola rádió | B épület | félemelet | A főlépcsőnél fordulj jobbra.
+M08/1 vill. műhely | B épület | 2. emelet | A főlépcsőnél balra fordulj, majd egyenesen a műhely ajtaján be és rögtön balra találod.
+M08/2 vill. műhely | B épület | 2. emelet | A főlépcsőnél balra fordulj, majd egyenesen a műhely ajtaján be és szemben a baloldali ajtónál találod.
+M08/3 vill. műhely | B épület | 2. emelet | A főlépcsőnél balra fordulj, majd egyenesen a műhely ajtaján be és szemben a jobboldali ajtónál találod.
+Műhely szertár | B épület | 2. emelet | A főlépcsőnél balra fordulj, majd egyenesen be a műhely ajtaján be és jobbra a második ajtónál találod.
+Technológiai előkészítő | B épület | 2. emelet | A főlépcsőnél balra fordulj, majd egyenesen be a műhely ajtaján be és rögtön jobbra találod.
+Erősáramú labor | B épület | 2. emelet | A főlépcsőnél balra fordulj, majd egyenesen be a műhely bejáratáig, ahol a lépcsővel szemben találod.
+14-es terem | B épület | 2. emelet | A főlépcsőnél balra fordulj, majd egyenesen a folyosó közepéig menve a jobb oldalon találod.
+Vill. szertár | B épület | 2. emelet | A főlépcsőnél balra fordulj, majd pár lépést haladva a jobb oldalon találod.
+13-as terem | B épület | 2. emelet | A főlépcsőnél állva rögtön szemben találod.
+Gépész szertár | B épület | 2. emelet | A főlépcsőtől pár lépést jobbra téve a bal oldalon találod.
+12-es terem | B épület | 2. emelet | A főlépcsőnél jobbra fordulj és a folyosó végén balra találod.
+15-ös terem | B épület | 2. emelet | A főlépcsőnél balra fordulj, majd a folyosó közepéig haladva a bal oldalon találod a lépcső előtt.
+16-os terem | B épület | 2. emelet | A főlépcsőnél balra fordulj, majd pár lépést téve egyenesen a bal oldalon találod.
+DÖK helyiség | B épület | 2. emelet | A főlépcsőnél jobbra fordulj, majd egyenesen a folyosó végén szemben találod.
+Tanári teakonyha | B épület | 2. emelet | A főlépcsőnél jobbra fordulva az első ajtónál találod.
+Számítógépes mérőlabor | B épület | 3. emelet | A főlépcsőnél balra fordulj, majd egészen a folyosó végén a bal oldalon találod.
+Technológiai mérőlabor | B épület | 3. emelet | A főlépcsőnél balra fordulj, majd a folyosó végén a bal oldalon találod a lépcső után.
+Elektronikai mérőlabor | B épület | 3. emelet | A főlépcsőnél balra fordulj, majd egészen a folyosó végén a jobb oldalon találod.
+Automatika labor | B épület | 3. emelet | A főlépcsőnél balra fordulj, majd a folyosó végén a jobb oldalon találod a lépcsővel szemben.
+19-es terem | B épület | 3. emelet | A főlépcsőnél balra fordulj, majd a folyosó közepéig haladva a jobb oldalon találod.
+Magyar szertár | B épület | 3. emelet | A főlépcsőnél balra fordulj, majd a folyosó közepéig haladva a jobb oldalon találod.
+18-as terem | B épület | 3. emelet | A főlépcsőnél pontosan szemben találod.
+17-es terem | B épület | 3. emelet | A főlépcsőnél jobbra fordulj és balra találod.
+Könyvtár | B épület | 3. emelet | A főlépcsőnél jobbra fordulj és szemben találod találod.
+20-as terem | B épület | 3. emelet | A főlépcsőnél balra fordulj és a folyosó közepén balra találod.
+2. Fizika szertár | B épület | 3. emelet | A főlépcsőnél balra fordulj és a folyosó közepén balra a lépcső előtt találod.
+Rádió | B épület | 3. emelet | A főlépcsőnél jobbra fordulj, majd rögtön a jobb oldalon találod.
+M05 szerelő műhely | C épület | Földszint | Az épületbe érve a bal sarokban találod.
+M03 hegesztő műhely | C épület | Földszint | Az épületbe érve a jobb oldalon a lépcső mellett találod.
+Szerelő előkészítő | C épület | Földszint | Az épületbe érve a bal oldalon találod.
+21-es terem | C épület | 1. emelet | A lépcsőnél a folyosó végén a jobb oldalon találod.
+22-es terem | C épület | 1. emelet | A lépcsőnél a folyosó végén a jobb oldalon találod.
+30-as terem | C épület | 1. emelet | A lépcsőnél a folyosó végén szemben találod.
+Informatika központ | C épület | 1. emelet | A lépcsőnél állva a jobb oldalon találod.
+23-as terem | C épület | 2. emelet | A lépcsőnél a szint végén jobbra találod.
+24-es terem | C épület | 2. emelet | A lépcsőnél rögtön jobbra találod.
+25-ös terem | C épület | 2. emelet | A lépcsőnél egyenesen szemben találod.
+Számítástechnika szertár | C épület | 2. emelet | A lépcsőnél állva jobbra találod.

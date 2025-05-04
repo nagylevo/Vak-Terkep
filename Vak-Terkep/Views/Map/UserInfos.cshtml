@@ -1,0 +1,57 @@
+﻿@{
+    var userName = Context.Session.GetString("userName");
+    var email = Context.Session.GetString("email");
+    var imageUrl = Context.Session.GetString("profilePictureUrl") ?? "/userImage.png";
+}
+@{
+    Layout = "~/Views/Shared/Layout2.cshtml";
+}
+
+<div id="form" style="max-width: fit-content;max-height: fit-content;padding: 40px">
+    <p id="kozepPar">
+        <img id="logoPic" class="userPic" src="@imageUrl" draggable="false">
+    </p> 
+    <label class="signButton" for="fileInput" style="font-size: 12pt">
+        Fájl feltöltése 
+
+
+    </label>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="fileInput" accept="image/*">
+        
+        <button type="button" style="margin-top:10pt;border:none;" class="searchButton" id="mentesButton" onclick="uploadImage()">Mentés</button>
+    </form>
+    <p id="namePar"> <strong> Felhasználónév: </strong> @userName</p>
+    <p id="emailPar"> <strong> Email: </strong> @email</p>
+    
+    <a class="searchButton" href="@Url.Action("Saved", "Map")">Elmentett útvonalak</a>
+
+</div>
+
+<script>
+    function uploadImage() {
+        var fileInput = document.getElementById('fileInput');
+        if (fileInput.files.length !== 0) {
+
+           
+        var formData = new FormData();
+        formData.append("file", fileInput.files[0]);
+
+        fetch('/Accounts/UploadProfilePicture', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                    location.reload();
+            } else {
+                alert("Hiba történt a kép feltöltése közben!");
+            }
+        })
+        .catch(error => console.error('Error:', error));
+            
+        }
+        
+    }
+</script>

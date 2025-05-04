@@ -1,5 +1,5 @@
 ﻿@{
-  
+
     var imageUrl = Context.Session.GetString("profilePictureUrl") ?? "/userImage.png";
 }
 <!DOCTYPE html>
@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Vak_Terkep.styles.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
 </head>
 <body>
 
@@ -55,17 +61,13 @@
             @RenderBody()
         </main>
     </div>
-    <footer id="footerMenu">
-        <p id="creatorsText"><u>Készítette:</u> <br /> Dombi Ádám - Juhász Viktor - Nagy Levente
-    </footer>
+    
 
-   
+
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    
 </body>
 </html>
